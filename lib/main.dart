@@ -2,6 +2,7 @@ import 'package:expense_planner/transaction.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import './transaction.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(MyApp());
@@ -68,7 +69,7 @@ class MyHomePage extends StatelessWidget {
                         margin:
                             EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                         child: Text(
-                          tx.amount.toString(),
+                           ' ₹ ${tx.amount}',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
@@ -76,8 +77,7 @@ class MyHomePage extends StatelessWidget {
                         ),
                       ),
                       Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             tx.title,
@@ -88,8 +88,8 @@ class MyHomePage extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            tx.date.toString(),
-                            style: TextStyle(letterSpacing:2,
+                           DateFormat('yyyy-MM-dd').format(tx.date),
+                            style: TextStyle(
                               fontSize: 10,
                               color: Colors.black38,
                               fontWeight: FontWeight.bold,
@@ -99,7 +99,6 @@ class MyHomePage extends StatelessWidget {
                       )
                     ],
                   ),
-
                 );
               }).toList(),
             )
