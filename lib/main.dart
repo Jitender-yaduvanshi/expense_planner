@@ -7,10 +7,17 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MyHomePage();
+  }
+}
+
+class MyHomePage extends StatelessWidget {
   final List<Transaction> transaction = [
     Transaction(
       id: 't1',
-      title: 'new Shoes',
+      title: 'New Shoes',
       amount: 650,
       date: DateTime.now(),
     ),
@@ -21,13 +28,6 @@ class MyApp extends StatelessWidget {
       date: DateTime.now(),
     ),
   ];
-  @override
-  Widget build(BuildContext context) {
-    return MyHomePage();
-  }
-}
-
-class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -43,7 +43,7 @@ class MyHomePage extends StatelessWidget {
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Card(
               elevation: 5,
@@ -53,7 +53,13 @@ class MyHomePage extends StatelessWidget {
                 child: Text('CHART!'),
               ),
             ),
-            //Column(children: Transaction.map((){}).toList,),
+            Column(
+              children: transaction.map((tx) {
+                return Card(
+                  child: Text(tx.title),
+                );
+              }).toList(),
+            )
           ],
         ),
       ),
