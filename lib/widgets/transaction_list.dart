@@ -21,7 +21,7 @@ class TransactionList extends StatelessWidget {
                   ),
                   margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                   child: Text(
-                    ' ₹ ${tx.amount}',
+                    ' ₹ ${tx.amount.toStringAsFixed(2)}',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,

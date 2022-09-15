@@ -13,6 +13,9 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
+  void startAddNewTransaction(){
+    showModalBottomSheet(context: context, builder: builder)
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,6 +28,15 @@ class MyHomePage extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
+          actions: [
+            IconButton(
+              icon: Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
+              onPressed: () {},
+            )
+          ],
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -41,6 +53,11 @@ class MyHomePage extends StatelessWidget {
               UserTransactions()
             ],
           ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: Icon(Icons.add,color: Colors.white,),
         ),
       ),
       debugShowCheckedModeBanner: false,
