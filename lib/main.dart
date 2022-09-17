@@ -2,6 +2,7 @@ import './widgets/transaction_list.dart';
 import './widgets/new_transaction.dart';
 import './models/transaction.dart';
 import 'package:flutter/material.dart';
+import './widgets/chart.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,7 +11,10 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: MyHomePage());
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: MyHomePage(),
+    );
   }
 }
 
@@ -34,13 +38,23 @@ class _MyHomePageState extends State<MyHomePage> {
       date: DateTime.now(),
     ),
   ];
+  List<Transaction> get _recentTransactions {
+    return _userTransactions.where((tx) {
+      return tx.date.isAfter(
+        DateTime.now().subtract(
+          Duration(days: 7),
+        ),
+      );
+    }).toList();
+  }
+
   void _startAddNewTransaction(BuildContext ctx) {
     showModalBottomSheet(
       context: ctx,
       builder: (_) {
         return GestureDetector(
           child: NewTransaction(_addNewTransaction),
-          onTap:() {},
+          onTap: () {},
           behavior: HitTestBehavior.opaque,
         );
       },
@@ -64,6 +78,9 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+          primarySwatch: Colors.deepPurple, accentColor: Colors.amberAccent),
       home: Scaffold(
         appBar: AppBar(
           elevation: 18,
@@ -87,13 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                child: Card(
-                  elevation: 5,
-                  color: Colors.grey,
-                  child: Text('CHART!'),
-                ),
-              ),
+              Chart(_recentTransactions),
               TransactionList(_userTransactions),
             ],
           ),
@@ -107,7 +118,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ),
-      debugShowCheckedModeBanner: false,
     );
   }
 }
