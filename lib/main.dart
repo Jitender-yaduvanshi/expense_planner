@@ -61,11 +61,11 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  void _addNewTransaction(String txTitle, double txAmount) {
+  void _addNewTransaction(String txTitle, double txAmount,DateTime chosenDate) {
     final newTx = Transaction(
       title: txTitle,
       amount: txAmount,
-      date: DateTime.now(),
+      date: chosenDate,
       id: DateTime.november.toString(),
     );
     setState(
@@ -81,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           primarySwatch: Colors.deepPurple, accentColor: Colors.amberAccent),
-      home: Scaffold(
+      home: Scaffold( backgroundColor: Colors.grey,
         appBar: AppBar(
           elevation: 18,
           title: Center(
